@@ -200,15 +200,15 @@
 }
 
 @utility bg-citrus-gradient {
-  background: var(--gradient-citrus);
+  background-image: var(--gradient-citrus);
 }
 
 @utility bg-forest-gradient {
-  background: var(--gradient-forest);
+  background-image: var(--gradient-forest);
 }
 
 @utility bg-sun {
-  background: var(--gradient-sun);
+  background-image: var(--gradient-sun);
 }
 
 @utility shadow-glow {
