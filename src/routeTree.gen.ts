@@ -9,13 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProductosRouteImport } from './routes/productos'
 import { Route as DistribuidoresRouteImport } from './routes/distribuidores'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AnunciosRouteImport } from './routes/anuncios'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductosRoute = ProductosRouteImport.update({
   id: '/productos',
   path: '/productos',
@@ -41,6 +48,11 @@ const AnunciosRoute = AnunciosRouteImport.update({
   path: '/anuncios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,67 +61,88 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/anuncios': typeof AnunciosRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/distribuidores': typeof DistribuidoresRoute
   '/productos': typeof ProductosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/anuncios': typeof AnunciosRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/distribuidores': typeof DistribuidoresRoute
   '/productos': typeof ProductosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/anuncios': typeof AnunciosRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/distribuidores': typeof DistribuidoresRoute
   '/productos': typeof ProductosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/anuncios'
     | '/auth'
     | '/contacto'
     | '/distribuidores'
     | '/productos'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/anuncios'
     | '/auth'
     | '/contacto'
     | '/distribuidores'
     | '/productos'
+    | '/sitemap.xml'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/anuncios'
     | '/auth'
     | '/contacto'
     | '/distribuidores'
     | '/productos'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AnunciosRoute: typeof AnunciosRoute
   AuthRoute: typeof AuthRoute
   ContactoRoute: typeof ContactoRoute
   DistribuidoresRoute: typeof DistribuidoresRoute
   ProductosRoute: typeof ProductosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/productos': {
       id: '/productos'
       path: '/productos'
@@ -145,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnunciosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -157,11 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AnunciosRoute: AnunciosRoute,
   AuthRoute: AuthRoute,
   ContactoRoute: ContactoRoute,
   DistribuidoresRoute: DistribuidoresRoute,
   ProductosRoute: ProductosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -562,17 +562,11 @@ function RolesAdmin({ isAdmin, currentUserId }: { isAdmin: boolean; currentUserI
   });
 
   async function claimAdmin() {
-    // Solo funciona si aún no hay admin (RLS permite a authenticated hacer INSERT solo si es admin, pero primer caso: no hay admin, insertamos via RPC seguro... aquí lo hacemos vía direct insert; funciona sólo si RLS lo permite. Alternativa: dejamos que el primer usuario se auto-eleve una única vez.)
-    // Como la política requiere admin para insertar, usamos un pequeño truco: llamamos a la API con un upsert cuando no hay admin.
-    if (anyAdmin) { toast.error("Ya hay un administrador. Pídele que te asigne el rol."); return; }
-    // Insertamos usando el flujo normal. Para permitir esto, el primer admin debe ser asignado manualmente por el propietario del proyecto desde el panel de Cloud si RLS bloquea. Intentamos igual:
-    const { error } = await supabase.from("user_roles").insert({ user_id: currentUserId, role: "admin" });
-    if (error) {
-      toast.error("No fue posible auto-asignarte. Pide al soporte que te haga administrador desde el panel de Cloud (tabla user_roles).");
-      return;
-    }
-    toast.success("¡Ahora eres administrador! Recarga la página.");
-    qc.invalidateQueries();
+    const { data, error } = await supabase.rpc("claim_first_admin");
+    if (error) { toast.error(error.message); return; }
+    if (!data) { toast.error("Ya existe un administrador. Pídele que te asigne el rol."); return; }
+    toast.success("¡Ahora eres administrador! Recargando…");
+    setTimeout(() => window.location.reload(), 800);
   }
 
   async function toggleRole(userId: string, role: "admin" | "editor" | "user", enable: boolean) {
