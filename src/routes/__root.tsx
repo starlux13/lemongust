@@ -75,21 +75,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Cítricos Lemon Gust — Zumo de limón 100% natural del Caquetá" },
+      { title: "Cítricos Lemon Gust — Zumo de limón natural del Caquetá" },
       {
         name: "description",
         content:
-          "Zumo de limón, limonadas, sorbetes y granizados 100% naturales. Empresa 100% caqueteña con distribución en Villavicencio y el Meta.",
+          "Del Caquetá para toda Colombia. Zumo de limón, limonadas, sorbetes y granizados 100% naturales. Distribución oficial en Villavicencio.",
       },
       { name: "author", content: "Cítricos Lemon Gust S.A.S" },
-      { property: "og:title", content: "Cítricos Lemon Gust — Del Caquetá para toda Colombia" },
+      { property: "og:title", content: "Cítricos Lemon Gust — Zumo de limón natural del Caquetá" },
       {
         property: "og:description",
-        content: "Zumo de limón natural, limonadas, sorbetes y granizados. Empresa 100% caqueteña.",
+        content: "Del Caquetá para toda Colombia. Zumo de limón, limonadas, sorbetes y granizados 100% naturales. Distribución oficial en Villavicencio.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#faf8f0" },
+      { name: "twitter:title", content: "Cítricos Lemon Gust — Zumo de limón natural del Caquetá" },
+      { name: "twitter:description", content: "Del Caquetá para toda Colombia. Zumo de limón, limonadas, sorbetes y granizados 100% naturales. Distribución oficial en Villavicencio." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1484e6f4-19a5-4bc2-9505-28f031147608/id-preview-de6fd6be--41a5e814-f408-4a03-998e-0d7e375522a9.lovable.app-1783655272198.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1484e6f4-19a5-4bc2-9505-28f031147608/id-preview-de6fd6be--41a5e814-f408-4a03-998e-0d7e375522a9.lovable.app-1783655272198.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
