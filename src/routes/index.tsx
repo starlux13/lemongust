@@ -13,7 +13,7 @@ import productZumo from "@/assets/product-zumo.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cítricos Lemon Gust — Zumo de limón natural del Caquetá" },
+      { title: "Cítricos Lemon Gust — Zumo de limón natural" },
       {
         name: "description",
         content:
