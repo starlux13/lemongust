@@ -26,7 +26,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/productos" className="hover:text-citrus transition">Productos</Link></li>
             <li><Link to="/distribuidores" className="hover:text-citrus transition">Distribuidores</Link></li>
-            <li><Link to="/anuncios" className="hover:text-citrus transition">Anuncios</Link></li>
+            
             <li><Link to="/contacto" className="hover:text-citrus transition">Pedidos</Link></li>
           </ul>
         </div>

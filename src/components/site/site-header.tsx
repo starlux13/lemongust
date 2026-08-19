@@ -9,7 +9,6 @@ const nav = [
   { to: "/", label: "Inicio" },
   { to: "/productos", label: "Productos" },
   { to: "/distribuidores", label: "Distribuidores" },
-  { to: "/anuncios", label: "Anuncios" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 
@@ -52,7 +51,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          {session ? (
+          {session && (
             <>
               {canManage && (
                 <Button asChild variant="outline" size="sm">
@@ -65,10 +64,6 @@ export function SiteHeader() {
                 <LogOut className="h-4 w-4" />
               </Button>
             </>
-          ) : (
-            <Button asChild size="sm" variant="outline">
-              <Link to="/auth">Ingresar</Link>
-            </Button>
           )}
           <Button asChild size="sm" className="bg-citrus-gradient text-forest hover:opacity-90">
             <Link to="/contacto">Pedir domicilio</Link>
@@ -101,24 +96,20 @@ export function SiteHeader() {
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-2">
-              {session ? (
-                <>
-                  {canManage && (
-                    <Button asChild variant="outline">
-                      <Link to="/admin" onClick={() => setOpen(false)}>
-                        <Shield className="h-4 w-4" /> Panel Admin
-                      </Link>
-                    </Button>
-                  )}
-                  <Button variant="ghost" onClick={() => void signOut()}>
-                    Cerrar sesión
-                  </Button>
-                </>
-              ) : (
+          {session && (
+            <>
+              {canManage && (
                 <Button asChild variant="outline">
-                  <Link to="/auth" onClick={() => setOpen(false)}>Ingresar</Link>
+                  <Link to="/admin" onClick={() => setOpen(false)}>
+                    <Shield className="h-4 w-4" /> Panel Admin
+                  </Link>
                 </Button>
               )}
+              <Button variant="ghost" onClick={() => void signOut()}>
+                Cerrar sesión
+              </Button>
+            </>
+          )}
               <Button asChild className="bg-citrus-gradient text-forest">
                 <Link to="/contacto" onClick={() => setOpen(false)}>Pedir domicilio</Link>
               </Button>

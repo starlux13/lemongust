@@ -33,25 +33,12 @@ function HomePage() {
         .select("*")
         .eq("is_active", true)
         .order("sort_order")
-        .limit(6);
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  const { data: announcements } = useQuery({
-    queryKey: ["announcements", "preview"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("announcements")
-        .select("id,title,slug,excerpt,category,published_at,image_url")
-        .eq("is_published", true)
-        .order("published_at", { ascending: false })
         .limit(3);
       if (error) throw error;
       return data;
     },
   });
+
 
   const { data: distributors } = useQuery({
     queryKey: ["distributors", "preview"],
@@ -295,42 +282,6 @@ function HomePage() {
               )}
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ANUNCIOS */}
-      <section className="relative bg-forest-gradient text-forest-foreground grain py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-            <div>
-              <div className="text-xs uppercase tracking-[0.25em] text-citrus">Últimas noticias</div>
-              <h2 className="mt-3 text-display text-4xl sm:text-5xl text-forest-foreground">Foro & Anuncios</h2>
-            </div>
-            <Button asChild variant="outline" className="border-forest-foreground/30 bg-forest-foreground/5 text-forest-foreground hover:bg-forest-foreground/10 rounded-full">
-              <Link to="/anuncios">Ver todos <ArrowRight className="h-4 w-4" /></Link>
-            </Button>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {(announcements ?? []).map((a) => (
-              <Link
-                key={a.id}
-                to="/anuncios"
-                className="group rounded-3xl bg-forest-foreground/5 backdrop-blur border border-forest-foreground/10 p-6 hover:bg-forest-foreground/10 transition-all hover:-translate-y-1"
-              >
-                <div className="inline-block rounded-full bg-citrus/20 text-citrus px-3 py-1 text-[10px] uppercase tracking-widest">
-                  {a.category}
-                </div>
-                <h3 className="mt-4 text-display text-2xl text-forest-foreground group-hover:text-citrus transition">
-                  {a.title}
-                </h3>
-                <p className="mt-3 text-sm text-forest-foreground/70 line-clamp-3">{a.excerpt}</p>
-                <div className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-citrus">
-                  Leer más <ArrowRight className="h-3 w-3" />
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
