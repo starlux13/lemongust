@@ -33,25 +33,12 @@ function HomePage() {
         .select("*")
         .eq("is_active", true)
         .order("sort_order")
-        .limit(6);
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  const { data: announcements } = useQuery({
-    queryKey: ["announcements", "preview"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("announcements")
-        .select("id,title,slug,excerpt,category,published_at,image_url")
-        .eq("is_published", true)
-        .order("published_at", { ascending: false })
         .limit(3);
       if (error) throw error;
       return data;
     },
   });
+
 
   const { data: distributors } = useQuery({
     queryKey: ["distributors", "preview"],
